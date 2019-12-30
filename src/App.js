@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 import { getImages } from "./utilities/fetch";
 import List from "./components/List";
 import Header from "./components/Header";
+import Modal from "./components/Modal";
 import styles from "./App.module.scss";
 
 const App = () => {
@@ -17,10 +19,13 @@ const App = () => {
   }, []);
 
   return (
-    <div className={styles.app}>
-      <Header />
-      <List images={images} />
-    </div>
+    <BrowserRouter>
+      <div className={styles.app}>
+        <Header />
+        <Route path="/" render={() => <List images={images} />} />
+        <Route path="/image/:id" render={() => <Modal />} />
+      </div>
+    </BrowserRouter>
   );
 };
 
