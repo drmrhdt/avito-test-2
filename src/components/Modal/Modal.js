@@ -36,7 +36,7 @@ const Modal = props => {
           data-modal={true}
           onClick={back}
         ></button>
-        <div className={styles.modal__image}>
+        <div className={styles.modal__image_form}>
           <img src={url} alt="modal item" />
           <div className={styles.modal__form}>
             <input className={styles.modal__input} placeholder="Ваше имя" />
