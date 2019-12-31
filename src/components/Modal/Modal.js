@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { getImage } from "../../utilities/fetch";
+import classNames from "classnames";
+import { getImage, addComment } from "../../utilities/fetch";
 import styles from "./Modal.module.scss";
 
 const Modal = props => {
   let history = useHistory();
   const { id } = useParams();
   const [url, setUrl] = useState("");
+  const [name, setName] = useState("");
+  const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -19,45 +22,72 @@ const Modal = props => {
     fetchData();
   }, [id]);
 
-  let back = e => {
+  const back = e => {
     if (e.target.dataset.modal) {
       e.stopPropagation();
       history.goBack();
     }
   };
 
-  console.log(comments);
+  const addNewComment = async () => {
+    await addComment(id, { name: name, comment: comment });
+
+    setName("");
+    setComment("");
+  };
+
+  const setNameInput = e => {
+    setName(e.target.value);
+  };
+
+  const setCommentInput = e => {
+    setComment(e.target.value);
+  };
 
   return (
     <div className={styles.bg} data-modal={true} onClick={back}>
-      <div className={styles.modal}>
+      <div
+        className={classNames(
+          styles.modal,
+          comments.length ? styles.modal__width_70 : styles.modal__width_50
+        )}
+      >
         <button
           className={styles.modal__close_btn}
           data-modal={true}
           onClick={back}
         ></button>
-        <div className={styles.modal__image_form}>
-          <img src={url} alt="modal item" />
+        <div className={comments.length ? null : styles.modal__image_form}>
+          <img className={styles.modal__image} src={url} alt="modal item" />
           <div className={styles.modal__form}>
-            <input className={styles.modal__input} placeholder="Ваше имя" />
             <input
+              value={name}
+              className={styles.modal__input}
+              placeholder="Ваше имя"
+              onChange={setNameInput}
+            />
+            <input
+              value={comment}
               className={styles.modal__input}
               placeholder="Ваш комментарий"
+              onChange={setCommentInput}
             />
-            <button className={styles.modal__button}>
+            <button className={styles.modal__button} onClick={addNewComment}>
               Оставить комментарий
             </button>
           </div>
         </div>
         {comments.length ? (
-          <div className={styles.modal__comments}>
-            {comments.map(comment => (
-              <div key={comment.id} className={styles.comments}>
-                <div className={styles.comments__date}></div>
-                <div className={styles.comments__text}>{comment.text}</div>
-              </div>
-            ))}
-          </div>
+          <>
+            <div className={styles.modal__comments}>
+              {comments.map(comment => (
+                <div key={comment.id} className={styles.comments}>
+                  <div className={styles.comments__date}></div>
+                  <div className={styles.comments__text}>{comment.text}</div>
+                </div>
+              ))}
+            </div>
+          </>
         ) : null}
       </div>
     </div>

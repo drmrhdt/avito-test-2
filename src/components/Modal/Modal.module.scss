@@ -17,30 +17,46 @@
   position: relative;
 
   display: flex;
-  width: 80%;
   margin: 0 auto;
   padding: 15px;
 
   background: "#fff";
   background-color: #ffffff;
 
+  &__width_70 {
+    width: 70%;
+  }
+
+  &__width_50 {
+    width: 50%;
+  }
+
   &__close_btn {
     position: absolute;
     top: 20px;
     right: 20px;
 
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
 
     background: transparent url("../../img/close.png") no-repeat center;
-    background-size: contain;
+    background-size: 80%;
     border: none;
     cursor: pointer;
+
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  &__image {
+    width: 100%;
   }
 
   &__image_form {
-    flex-grow: 1;
-    width: auto;
+    width: 100%;
   }
 
   &__form {
@@ -70,6 +86,12 @@
     border: none;
     border-radius: 3px;
     cursor: pointer;
+
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+      background-color: rgba(73, 151, 208, 0.8);
+    }
   }
 
   &__comments {

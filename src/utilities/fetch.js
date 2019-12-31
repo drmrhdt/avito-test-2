@@ -17,16 +17,21 @@ export async function getImage(id) {
 }
 
 export async function addComment(id, data) {
+  console.log(JSON.stringify(data));
   let response = await fetch(
     `https://boiling-refuge-66454.herokuapp.com/images/${id}/comments`,
     {
       method: "POST",
       headers: {
-        "Content-Type": "application/json;charset=utf-8"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     }
   );
-  response = await response.json();
-  return response;
+  if (response.ok) {
+    console.log(response);
+    // response = await response.json();
+  } else {
+    console.log(response.error);
+  }
 }
