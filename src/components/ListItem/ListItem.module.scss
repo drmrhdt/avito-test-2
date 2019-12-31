@@ -7,3 +7,21 @@
     height: 100%;
   }
 }
+
+@media (max-width: 575px) {
+  .list_item {
+    width: 100%;
+  }
+}
+
+@media (min-width: 576px) {
+  .list_item {
+    width: 47%;
+  }
+}
+
+@media (min-width: 768px) {
+  .list_item {
+    width: 30%;
+  }
+}

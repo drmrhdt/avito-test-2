@@ -17,17 +17,17 @@
   position: relative;
 
   display: flex;
+  box-sizing: border-box;
   margin: 0 auto;
   padding: 15px;
 
-  background: "#fff";
   background-color: #ffffff;
 
-  &__width_70 {
+  &__with_comments {
     width: 70%;
   }
 
-  &__width_50 {
+  &__without_comments {
     width: 50%;
   }
 
@@ -51,10 +51,8 @@
     }
   }
 
-  &__image {
-    width: 100%;
-  }
-
+  &__image,
+  &__isLoading,
   &__image_form {
     width: 100%;
   }
@@ -104,5 +102,38 @@
     &__text {
       color: #000000;
     }
+  }
+}
+
+@media (max-width: 575px) {
+  .bg {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .modal,
+  &__with_comments,
+  &__without_comments {
+    width: 100%;
+  }
+}
+
+@media (min-width: 576px) {
+  &__with_comments {
+    width: 80%;
+  }
+
+  &__without_comments {
+    width: 60%;
+  }
+}
+
+@media (min-width: 768px) {
+  &__with_comments {
+    width: 70%;
+  }
+
+  &__without_comments {
+    width: 50%;
   }
 }

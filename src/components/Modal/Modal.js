@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import classNames from "classnames";
 import { getImage, addComment } from "../../utilities/fetch";
+import loading from "../../img/loading.png";
 import styles from "./Modal.module.scss";
 
 const Modal = props => {
@@ -11,10 +12,13 @@ const Modal = props => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const response = await getImage(id);
+      setIsLoading(false);
       setUrl(response.url);
       setComments(response.comments);
     };
@@ -49,7 +53,9 @@ const Modal = props => {
       <div
         className={classNames(
           styles.modal,
-          comments.length ? styles.modal__width_70 : styles.modal__width_50
+          comments.length
+            ? styles.modal__with_comments
+            : styles.modal__without_comments
         )}
       >
         <button
@@ -59,6 +65,7 @@ const Modal = props => {
         ></button>
         <div className={comments.length ? null : styles.modal__image_form}>
           <img className={styles.modal__image} src={url} alt="modal item" />
+
           <div className={styles.modal__form}>
             <input
               value={name}
