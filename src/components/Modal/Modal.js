@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import classNames from "classnames";
+import Form from "../Form";
+import Comments from "../Comments";
 import { getImage, addComment } from "../../utilities/fetch";
 import loading from "../../img/loading.png";
 import styles from "./Modal.module.scss";
@@ -35,6 +37,9 @@ const Modal = props => {
 
   const addNewComment = async () => {
     await addComment(id, { name: name, comment: comment });
+    setComments(
+      comments.concat({ id: Math.floor(Math.random()), text: comment })
+    );
 
     setName("");
     setComment("");
@@ -62,40 +67,23 @@ const Modal = props => {
           className={styles.modal__close_btn}
           data-modal={true}
           onClick={back}
-        ></button>
-        <div className={comments.length ? null : styles.modal__image_form}>
-          <img className={styles.modal__image} src={url} alt="modal item" />
-
-          <div className={styles.modal__form}>
-            <input
-              value={name}
-              className={styles.modal__input}
-              placeholder="Ваше имя"
-              onChange={setNameInput}
-            />
-            <input
-              value={comment}
-              className={styles.modal__input}
-              placeholder="Ваш комментарий"
-              onChange={setCommentInput}
-            />
-            <button className={styles.modal__button} onClick={addNewComment}>
-              Оставить комментарий
-            </button>
+        />
+        <div className={styles.modal__image_comments}>
+          <div className={styles.modal_image__container}>
+            <img className={styles.modal__image} src={url} alt="modal item" />
           </div>
+          {comments.length ? (
+            <Comments className={styles.modal__comments} comments={comments} />
+          ) : null}
         </div>
-        {comments.length ? (
-          <>
-            <div className={styles.modal__comments}>
-              {comments.map(comment => (
-                <div key={comment.id} className={styles.comments}>
-                  <div className={styles.comments__date}></div>
-                  <div className={styles.comments__text}>{comment.text}</div>
-                </div>
-              ))}
-            </div>
-          </>
-        ) : null}
+        <Form
+          className={styles.modal__form}
+          name={name}
+          comment={comment}
+          setCommentInput={setCommentInput}
+          setNameInput={setNameInput}
+          addNewComment={addNewComment}
+        />
       </div>
     </div>
   );

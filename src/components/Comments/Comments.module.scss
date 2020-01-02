@@ -1,0 +1,7 @@
+.comment {
+  &:not(:first-of-type) {
+    padding: 10px 0;
+
+    word-break: break-all;
+  }
+}

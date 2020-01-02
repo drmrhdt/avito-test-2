@@ -1,4 +1,5 @@
 @import "typeface-roboto";
+@import "../../variables.scss";
 
 .bg {
   position: fixed;
@@ -10,18 +11,28 @@
   display: flex;
   align-items: center;
 
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: $modal-bg;
 }
 
 .modal {
   position: relative;
 
   display: flex;
+  flex-direction: column;
   box-sizing: border-box;
+  width: 100%;
   margin: 0 auto;
-  padding: 15px;
+  padding: 30px;
 
-  background-color: #ffffff;
+  background-color: $white;
+
+  &__comments {
+    width: 40%;
+  }
+
+  &__image__container {
+    width: 60%;
+  }
 
   &__with_comments {
     width: 70%;
@@ -33,11 +44,11 @@
 
   &__close_btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 5px;
+    right: 5px;
 
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 
     background: transparent url("../../img/close.png") no-repeat center;
     background-size: 80%;
@@ -47,61 +58,17 @@
     transition: 0.1s ease-in-out;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: $btn-hover-gray;
     }
+  }
+
+  &__image_comments {
+    display: flex;
   }
 
   &__image,
-  &__isLoading,
-  &__image_form {
+  &__isLoading {
     width: 100%;
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    padding-top: 25px;
-  }
-
-  &__input {
-    box-sizing: border-box;
-    margin-bottom: 25px;
-    padding: 10px 15px;
-
-    background: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 3px;
-  }
-
-  &__button {
-    padding: 10px 15px;
-
-    font-size: 20px;
-    font-family: "Roboto";
-    color: #ffffff;
-
-    background: #4997d0;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-
-    transition: 0.1s ease-in-out;
-
-    &:hover {
-      background-color: rgba(73, 151, 208, 0.8);
-    }
-  }
-
-  &__comments {
-    padding: 0 20px;
-
-    &__date {
-      color: #999999;
-    }
-
-    &__text {
-      color: #000000;
-    }
   }
 }
 
@@ -110,30 +77,98 @@
     display: flex;
     align-items: stretch;
   }
-
-  .modal,
-  &__with_comments,
-  &__without_comments {
+  .modal {
     width: 100%;
+    padding: 0;
+
+    &__image_comments {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__comments {
+      padding: 20px 0 0 0;
+    }
+
+    &__with_comments,
+    &__without_comments {
+      width: 100%;
+    }
+
+    &__form {
+      width: 100%;
+    }
   }
 }
 
 @media (min-width: 576px) {
-  &__with_comments {
-    width: 80%;
-  }
+  .modal {
+    &__image_comments {
+      display: flex;
+      flex-direction: column;
+    }
 
-  &__without_comments {
-    width: 60%;
+    &__comments {
+      padding: 20px 0 0 0;
+    }
+
+    &__with_comments {
+      width: 80%;
+    }
+
+    &__without_comments {
+      width: 60%;
+    }
+
+    &__form {
+      width: 100%;
+    }
   }
 }
 
 @media (min-width: 768px) {
-  &__with_comments {
-    width: 70%;
-  }
+  .modal {
+    &__image_comments {
+      display: flex;
+      flex-direction: column;
+    }
 
-  &__without_comments {
-    width: 50%;
+    &__comments {
+      padding: 20px 0 0 0;
+    }
+
+    &__with_comments {
+      width: 60%;
+    }
+
+    &__without_comments {
+      width: 50%;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .modal {
+    &__image_comments {
+      display: flex;
+      flex-direction: row;
+      width: auto;
+    }
+
+    &__comments {
+      padding: 0 20px;
+    }
+
+    &__with_comments {
+      width: 70%;
+
+      .modal__form {
+        width: 60%;
+      }
+    }
+
+    &__without_comments {
+      width: 50%;
+    }
   }
 }

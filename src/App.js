@@ -4,6 +4,7 @@ import { getImages } from "./utilities/fetch";
 import List from "./components/List";
 import Header from "./components/Header";
 import Modal from "./components/Modal";
+import Footer from "./components/Footer";
 import styles from "./App.module.scss";
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
         <Header />
         <Route path="/" render={() => <List images={images} />} />
         <Route path="/image/:id" render={() => <Modal />} />
+        <Footer />
       </div>
     </BrowserRouter>
   );

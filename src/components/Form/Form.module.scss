@@ -1,0 +1,43 @@
+@import "../../variables.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 60%;
+  padding-top: 25px;
+
+  &__input,
+  &__textarea {
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    padding: 10px 15px;
+
+    background: $white;
+    border: 1px solid $border-color;
+    border-radius: 3px;
+  }
+
+  &__textarea {
+    resize: vertical;
+  }
+
+  &__button {
+    padding: 10px 15px;
+
+    font-size: 20px;
+    font-family: "Roboto";
+    color: $white;
+
+    background: $btn-primary;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+      background-color: $btn-primary-hover;
+    }
+  }
+}

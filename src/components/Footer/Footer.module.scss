@@ -1,0 +1,12 @@
+@import "../../variables.scss";
+
+.footer {
+  padding: 12px 0;
+
+  border-top: 1px solid $border-color;
+
+  &__text {
+    text-align: center;
+    color: $border-color;
+  }
+}
