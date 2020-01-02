@@ -4,7 +4,7 @@ import classNames from "classnames";
 import Form from "../Form";
 import Comments from "../Comments";
 import { getImage, addComment } from "../../utilities/fetch";
-import loading from "../../img/loading.png";
+// import loading from "../../img/loading.png";
 import styles from "./Modal.module.scss";
 
 const Modal = props => {
@@ -14,13 +14,13 @@ const Modal = props => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
+      // setIsLoading(true);
       const response = await getImage(id);
-      setIsLoading(false);
+      // setIsLoading(false);
       setUrl(response.url);
       setComments(response.comments);
     };
@@ -63,27 +63,44 @@ const Modal = props => {
             : styles.modal__without_comments
         )}
       >
-        <button
-          className={styles.modal__close_btn}
-          data-modal={true}
-          onClick={back}
-        />
-        <div className={styles.modal__image_comments}>
-          <div className={styles.modal_image__container}>
-            <img className={styles.modal__image} src={url} alt="modal item" />
+        <div>
+          <button
+            className={styles.modal__close_btn}
+            data-modal={true}
+            onClick={back}
+          />
+          <div className={styles.modal__image_comments_column}>
+            <div className={styles.modal_image__container}>
+              <img className={styles.modal__image} src={url} alt="modal item" />
+            </div>
+            {comments.length ? (
+              <Comments
+                className={classNames(
+                  styles.modal__comments,
+                  styles.modal__comments_column
+                )}
+                comments={comments}
+              />
+            ) : null}
           </div>
-          {comments.length ? (
-            <Comments className={styles.modal__comments} comments={comments} />
-          ) : null}
+          <Form
+            className={styles.modal__form}
+            name={name}
+            comment={comment}
+            setCommentInput={setCommentInput}
+            setNameInput={setNameInput}
+            addNewComment={addNewComment}
+          />
         </div>
-        <Form
-          className={styles.modal__form}
-          name={name}
-          comment={comment}
-          setCommentInput={setCommentInput}
-          setNameInput={setNameInput}
-          addNewComment={addNewComment}
-        />
+        {comments.length ? (
+          <Comments
+            className={classNames(
+              styles.modal__comments,
+              styles.modal__comments_row
+            )}
+            comments={comments}
+          />
+        ) : null}
       </div>
     </div>
   );

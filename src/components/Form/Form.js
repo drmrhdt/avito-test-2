@@ -12,6 +12,7 @@ function Form(props) {
     setCommentInput,
     addNewComment
   } = props;
+
   return (
     <div className={classNames(styles.form, className)}>
       <input
