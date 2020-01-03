@@ -24,7 +24,7 @@ const App = () => {
       <div className={styles.app}>
         <Header />
         <Route path="/" render={() => <List images={images} />} />
-        <Route path="/image/:id" render={() => <Modal />} />
+        <Route path="/image/:id" render={() => <Modal images={images} />} />
         <Footer />
       </div>
     </BrowserRouter>
