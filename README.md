@@ -3,6 +3,10 @@
 Тестовое задание на позицию Frontend-стажёр в юнит Safedeal.
 https://github.com/avito-tech/safedeal-frontend-trainee
 
+# Запуск
+1. npm i
+2. npm run start
+
 # Задание
 
 Необходимо сверстать адаптивную страницу со списком фотографий.​
