@@ -6,4 +6,9 @@
   overflow-y: hidden;
 
   font-family: "Roboto";
+
+  &__loading {
+    font-size: 28px;
+    text-align: center;
+  }
 }

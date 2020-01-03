@@ -9,10 +9,13 @@ import styles from "./App.module.scss";
 
 const App = () => {
   const [images, setImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const response = await getImages();
+      setIsLoading(false);
       setImages(response);
     };
 
@@ -23,7 +26,16 @@ const App = () => {
     <BrowserRouter>
       <div className={styles.app}>
         <Header />
-        <Route path="/" render={() => <List images={images} />} />
+        <Route
+          path="/"
+          render={() =>
+            isLoading ? (
+              <p className={styles.app__loading}>...Загрузка</p>
+            ) : (
+              <List images={images} />
+            )
+          }
+        />
         <Route path="/image/:id" render={() => <Modal images={images} />} />
         <Footer />
       </div>
