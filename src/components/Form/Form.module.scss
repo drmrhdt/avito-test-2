@@ -22,6 +22,12 @@
     resize: vertical;
   }
 
+  &__error {
+    box-shadow: 0 0 3px 2px $error;
+
+    transition: 0.1s ease-in-out;
+  }
+
   &__button {
     padding: 10px 15px;
 

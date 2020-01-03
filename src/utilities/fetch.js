@@ -17,7 +17,6 @@ export async function getImage(id) {
 }
 
 export async function addComment(id, data) {
-  console.log(JSON.stringify(data));
   let response = await fetch(
     `https://boiling-refuge-66454.herokuapp.com/images/${id}/comments`,
     {

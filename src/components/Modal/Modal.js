@@ -11,10 +11,9 @@ const Modal = props => {
   let history = useHistory();
   const { id } = useParams();
   const [url, setUrl] = useState("");
-  const [name, setName] = useState("");
-  const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
+  const [modalStatus, setModalStatus] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,31 +25,37 @@ const Modal = props => {
     };
 
     fetchData();
-  }, [id]);
+
+    return () => {
+      setModalStatus(false);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (modalStatus) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [modalStatus]);
 
   const back = e => {
     if (e.target.dataset.modal) {
       e.stopPropagation();
       history.goBack();
+      setModalStatus(false);
     }
   };
 
-  const addNewComment = async () => {
+  const addNewComment = async (name, comment) => {
     await addComment(id, { name: name, comment: comment });
     setComments(
-      comments.concat({ id: Math.floor(Math.random()), text: comment })
+      comments.concat({
+        id: Math.floor(Math.random() * 10000),
+        text: comment
+      })
     );
-
-    setName("");
-    setComment("");
-  };
-
-  const setNameInput = e => {
-    setName(e.target.value);
-  };
-
-  const setCommentInput = e => {
-    setComment(e.target.value);
   };
 
   return (
@@ -83,14 +88,7 @@ const Modal = props => {
               />
             ) : null}
           </div>
-          <Form
-            className={styles.modal__form}
-            name={name}
-            comment={comment}
-            setCommentInput={setCommentInput}
-            setNameInput={setNameInput}
-            addNewComment={addNewComment}
-          />
+          <Form className={styles.modal__form} addNewComment={addNewComment} />
         </div>
         {comments.length ? (
           <Comments
