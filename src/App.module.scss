@@ -1,14 +1,13 @@
-@import "typeface-roboto";
-
 .app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 90%;
+  height: 100vh;
   margin: 0 auto;
-  overflow-y: hidden;
-
-  font-family: "Roboto";
+  padding: 0;
 
   &__loading {
-    font-size: 28px;
-    text-align: center;
+    align-self: center;
   }
 }

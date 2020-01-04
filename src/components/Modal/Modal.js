@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import Form from "../Form";
 import Comments from "../Comments";
 import { getImage, addComment } from "../../utilities/fetch";
@@ -127,6 +128,19 @@ const Modal = props => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      url: PropTypes.string.isRequired
+    })
+  )
+};
+
+Modal.defaultProps = {
+  images: []
 };
 
 export default Modal;
